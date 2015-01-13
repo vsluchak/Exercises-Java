@@ -9,21 +9,34 @@ package com.placester.test;
  * 
  * src/test/com/placester/test/WeightedDiceTest
  */
-public class SixSidedWeightedDie extends WeightedDie
+public class SixSidedWeightedDie extends WeightedDie 
 {
     //NOTE: since these are weights on a probability distribution, these should sum to one, and the incoming array
     // should be of length 6. You should throw if either of these preconditions is false
-    private int[] sidesSet;
-    public SixSidedWeightedDie(float[] weights)
+    private int[100] sidesSet; //the length is set according to the allowed error of 0.01 in the test 
+    private int[6] frequency;
+    
+   public SixSidedWeightedDie(float[] weights) 
     {
         super(weights);
         try {
             if (weights.length) != 6 throw new IIOException("The number of weights should be 6, please fix.");
-            float sum = 0.0;
+            float sum = 0.0f;
             for (float i : weight) sum += sum;
-            if (sum != 1.0) throw new IIOException("The sum of weights should be 1.0, please fix.")
-        
-            
+            if (sum != 1.0f) throw new IIOException("The sum of weights should be 1.0, please fix.")
+        // Fill up the sides set with the numbers from 1 to 6 repeated according to the weights
+        int start = 0;
+        int end = 0 ;
+        for (i=0;i<6;i++)
+        {
+        frequency[i] = (int)(100*weights[i]);
+        end = start + frequency[i];     
+        for (int j=start;j<end;j++) 
+        { 
+            sidesSet[j] = i ;
+        }
+        start = end;
+        }
         }
         catch (Exception e)
         {
@@ -40,7 +53,9 @@ public class SixSidedWeightedDie extends WeightedDie
     public int throwDie()
     {
         // TODO Auto-generated method stub
-        return 0;
+        int randomChoice = (int)(100*Math.random());
+        return sideSet[randomChoice];
+        
     }
 
 }
