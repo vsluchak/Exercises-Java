@@ -60,7 +60,7 @@ public class ThreadSafePriorityQueue<X> implements SimpleQueue<Priority<X>>
      
  }
 
- private void moveNodeUp(int index , Priority<X> e) {
+ private synchronized void moveNodeUp(int index , Priority<X> e) {
 	 
 	 if (index == 0 ) return;
 	 int parentIndex = index/2; //<---integer division 
