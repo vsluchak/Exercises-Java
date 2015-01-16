@@ -72,7 +72,7 @@ public class ThreadSafePriorityQueue<X> implements SimpleQueue<Priority<X>>
  }
  
  @Override
- public boolean add(Priority<X> e)
+ public synchronized boolean add(Priority<X> e)
  {
      // TODO Auto-generated method stub
      if (queue.add(e)) 
